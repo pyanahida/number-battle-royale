@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Number Battle Royale</title>
+<style>
+  * { box-sizing: border-box; user-select: none; -webkit-tap-highlight-color: transparent; }
+  body {
+    margin: 0; min-height: 100vh; background: #000;
+    color: #FFF; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    display: flex; justify-content: center; overflow: hidden;
+  }
+  #app {
+    display: flex; flex-direction: column; align-items: center;
+    padding: 15px; width: 100%; height: 100vh;
+  }
+  h1 { font-size: 22px; margin: 0 0 15px 0; letter-spacing: 2px; font-weight: normal; text-align: center; }
+  
+  #controls { display: flex; flex-direction: column; gap: 10px; width: 100%; max-width: 400px; margin-bottom: 15px; }
+  .setup { display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #333; padding-bottom: 10px; }
+  select, button {
+    background: #000; color: #FFF; border: 1px solid #FFF;
+    padding: 8px 12px; font-family: inherit; font-size: 14px; outline: none;
+  }
+  button { cursor: pointer; transition: 0.2s; font-weight: bold; flex: 1; }
+  button:active { background: #FFF; color: #000; }
+  
+  #stats { width: 100%; max-width: 400px; display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 16px; }
+  
+  #arena-wrap {
+    width: 90vmin; height: 90vmin; max-width: 500px; max-height: 500px;
+    border: 2px solid #FFF; position: relative; overflow: hidden;
+  }
+  svg { width: 100%; height: 100%; display: block; }
+  
+  .overlay {
+    position: absolute; inset: 0; background: rgba(0,0,0,0.85);
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    text-align: center; padding: 20px; z-index: 10;
+  }
+  .overlay h2 { font-size: 24px; margin: 0 0 10px 0; }
+  .overlay p { font-size: 14px; color: #AAA; margin: 0 0 20px 0; word-break: break-all; }
+  .hidden { display: none !important; }
+</style>
+</head>
+<body>
+<div id="app">
+  <h1>Number Battle Royale</h1>
+  
+  <div id="controls">
+    <div class="setup">
+      <label>Select Ball</label>
+      <select id="ballSelect"></select>
+    </div>
+    <div style="display: flex; gap: 10px; width: 100%;">
+      <button id="startBtn">Start</button>
+      <button id="pauseBtn" style="display: none;">Pause</button>
+      <button id="resetBtn" style="display: none;">Reset</button>
+    </div>
+  </div>
+
+  <div id="stats">
+    <div>Level: <span id="levelDisplay">1</span></div>
+    <div>Time: <span id="timeDisplay">20.0</span>s</div>
+    <div>HP: <span id="hpDisplay">-</span></div>
+  </div>
+
+  <div id="arena-wrap">
+    <svg id="arena" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet"></svg>
+    
+    <div id="resultOverlay" class="overlay hidden">
+      <h2 id="resultTitle">GAME OVER</h2>
+      <p id="resultDesc">You died.</p>
+      <button id="restartBtn" style="flex: none;">Play Again</button>
+    </div>
+  </div>
+</div>
+
+<script src="main.js"></script>
+</body>
+</html>
